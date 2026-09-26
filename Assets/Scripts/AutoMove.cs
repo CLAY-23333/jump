@@ -32,7 +32,6 @@ public class AutoMove : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, groundCheckDistance))
         {
-
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
