@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -25,7 +26,15 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            RestartCurrentLevel();
+        }
+    }
+    
     private void Start()
     {
         if (winUI != null)
@@ -82,5 +91,12 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("Win UI is not assigned!");
             }
         }
+    }
+    
+    public void RestartCurrentLevel()
+    {
+        Time.timeScale = 1f;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
